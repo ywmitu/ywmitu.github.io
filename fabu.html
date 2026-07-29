@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Libvio 发布页 · 永久导航</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: {
+              900: '#0a0e1a',
+              800: '#0f1525',
+              700: '#161e33',
+              600: '#1e2845',
+              500: '#2a3658',
+            },
+            glow: {
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+            },
+            accent: {
+              cyan: '#22d3ee',
+              purple: '#a855f7',
+              pink: '#ec4899',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans SC', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0a0e1a; }
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(168,85,247,0.12), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(34,211,238,0.10), transparent 60%);
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+    }
+    .glass {
+      background: rgba(22,30,51,0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(59,130,246,0.12);
+    }
+    .glass-hover { transition: all 0.25s ease; }
+    .glass-hover:hover {
+      background: rgba(30,40,69,0.8);
+      border-color: rgba(96,165,250,0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px -8px rgba(59,130,246,0.2);
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 0 0 0 rgba(59,130,246,0.5), 0 4px 20px -4px rgba(59,130,246,0.5);
+      transition: all 0.25s ease;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 6px 28px -4px rgba(59,130,246,0.6);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      border: 1px solid rgba(96,165,250,0.25);
+      background: rgba(22,30,51,0.5);
+      transition: all 0.25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(96,165,250,0.5);
+      background: rgba(30,40,69,0.8);
+    }
+    .domain-card { transition: all 0.25s ease; }
+    .domain-card:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.4); }
+
+    .pulse-dot { animation: pulse-ring 2s ease-out infinite; }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .fade-up { animation: fadeUp 0.6s ease-out both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+
+    .os-tab { transition: all 0.2s ease; cursor: pointer; }
+    .os-tab.active { background: rgba(59,130,246,0.15); border-color: rgba(96,165,250,0.4); color: #60a5fa; }
+    .os-panel { display: none; }
+    .os-panel.active { display: block; animation: fadeUp 0.4s ease-out; }
+
+    .step-num {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 2px 12px -2px rgba(59,130,246,0.5);
+    }
+
+    .float-fade { animation: floatY 4s ease-in-out infinite; }
+    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    .marquee-track { animation: marquee 30s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .copy-toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120%);
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1); z-index: 60;
+    }
+    .copy-toast.show { transform: translateX(-50%) translateY(0); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 3px; }
+  </style>
+</head>
+<body class="text-gray-200 font-sans min-h-screen overflow-x-hidden">
+
+  <!-- ====== Top Marquee Bar ====== -->
+  <div class="bg-ink-800/80 border-b border-white/5 overflow-hidden">
+    <div class="flex items-center h-9 text-xs text-gray-400">
+      <span class="flex-shrink-0 px-3 py-1 bg-glow-500/20 text-glow-400 font-medium ml-2 rounded">公告</span>
+      <div class="overflow-hidden flex-1">
+        <div class="marquee-track flex whitespace-nowrap gap-12 pl-6">
+          <span>🎉 本站最新域名已更新，请收藏本发布页获取永久入口</span>
+          <span>📱 APP 已更新至 v3.2.0，支持iOS/Android/TV全平台</span>
+          <span>⚠️ 请认准官方发布页，谨防钓鱼仿冒站点</span>
+          <span>🔔 加入 Telegram 频道，第一时间获取域名变更通知</span>
+          <span>🎉 本站最新域名已更新，请收藏本发布页获取永久入口</span>
+          <span>📱 APP 已更新至 v3.2.0，支持iOS/Android/TV全平台</span>
+          <span>⚠️ 请认准官方发布页，谨防钓鱼仿冒站点</span>
+          <span>🔔 加入 Telegram 频道，第一时间获取域名变更通知</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Hero ====== -->
+  <section class="relative hero-bg">
+    <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+    <div class="relative max-w-5xl mx-auto px-4 pt-16 pb-12 text-center fade-up">
+
+      <!-- Logo -->
+      <div class="flex items-center justify-center gap-3 mb-8">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-500 to-glow-600 flex items-center justify-center float-fade shadow-lg shadow-glow-500/30">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="text-left">
+          <h1 class="text-3xl font-black text-white tracking-tight">Libvio</h1>
+          <p class="text-xs text-gray-400 -mt-0.5">永久发布页 · 收藏不迷路</p>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <h2 class="text-2xl md:text-4xl font-black text-white mb-3 leading-tight">
+        最新可用域名
+      </h2>
+      <p class="text-gray-400 text-sm md:text-base mb-8 max-w-xl mx-auto">
+        以下为当前可用域名，如无法访问请按下方 DNS 教程修复或使用备用域名
+      </p>
+
+      <!-- Primary domain card -->
+      <div class="glass rounded-2xl p-5 md:p-6 mb-4 domain-card inline-block w-full max-w-2xl">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400 pulse-dot"></span>
+            <span class="text-green-400 text-sm font-medium">主域名</span>
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <p class="text-xl md:text-2xl font-bold text-white font-mono">libvio.com</p>
+            <p class="text-xs text-gray-500 mt-0.5">响应正常 · 延迟 42ms</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <button onclick="copyText('libvio.com')" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              复制
+            </button>
+            <a href="https://libvio.com" target="_blank" class="btn-glow text-sm px-5 py-2 rounded-lg text-white font-medium flex items-center gap-1.5">
+              立即访问
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick action buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+        <a href="#dns" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          DNS 修复教程
+        </a>
+        <a href="#mirrors" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          备用域名
+        </a>
+        <a href="#app" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          APP 下载
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Mirror Domains ====== -->
+  <section id="mirrors" class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="w-1 h-6 bg-glow-500 rounded-sm"></span>
+      <h3 class="text-lg font-bold text-white">备用域名</h3>
+      <span class="text-xs text-gray-500">任选其一，同步更新</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <!-- Mirror 1 -->
+      <div class="glass glass-hover rounded-xl p-4 domain-card">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>正常</span>
+          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用1</span>
+        </div>
+        <p class="text-base font-bold text-white font-mono mb-1">libvio.me</p>
+        <p class="text-xs text-gray-500 mb-3">延迟 56ms · 美国</p>
+        <div class="flex gap-2">
+          <button onclick="copyText('libvio.me')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
+          <a href="https://libvio.me" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
+        </div>
+      </div>
+      <!-- Mirror 2 -->
+      <div class="glass glass-hover rounded-xl p-4 domain-card">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>正常</span>
+          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用2</span>
+        </div>
+        <p class="text-base font-bold text-white font-mono mb-1">libvio.cc</p>
+        <p class="text-xs text-gray-500 mb-3">延迟 88ms · 日本</p>
+        <div class="flex gap-2">
+          <button onclick="copyText('libvio.cc')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
+          <a href="https://libvio.cc" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
+        </div>
+      </div>
+      <!-- Mirror 3 -->
+      <div class="glass glass-hover rounded-xl p-4 domain-card">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-yellow-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>较慢</span>
+          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用3</span>
+        </div>
+        <p class="text-base font-bold text-white font-mono mb-1">libvio.net</p>
+        <p class="text-xs text-gray-500 mb-3">延迟 156ms · 韩国</p>
+        <div class="flex gap-2">
+          <button onclick="copyText('libvio.net')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
+          <a href="https://libvio.net" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
+        </div>
+      </div>
+      <!-- Mirror 4 -->
+      <div class="glass glass-hover rounded-xl p-4 domain-card">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>正常</span>
+          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用4</span>
+        </div>
+        <p class="text-base font-bold text-white font-mono mb-1">libvio.io</p>
+        <p class="text-xs text-gray-500 mb-3">延迟 72ms · 新加坡</p>
+        <div class="flex gap-2">
+          <button onclick="copyText('libvio.io')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
+          <a href="https://libvio.io" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
+        </div>
+      </div>
+      <!-- Mirror 5 -->
+      <div class="glass glass-hover rounded-xl p-4 domain-card">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-red-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>维护中</span>
+          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用5</span>
+        </div>
+        <p class="text-base font-bold text-gray-500 font-mono mb-1">libvio.org</p>
+        <p class="text-xs text-gray-600 mb-3">暂不可用 · 等待恢复</p>
+        <div class="flex gap-2">
+          <button onclick="copyText('libvio.org')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-600 cursor-not-allowed" disabled>复制</button>
+          <span class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-600 text-center cursor-not-allowed">访问</span>
+        </div>
+      </div>
+      <!-- Permanent entry -->
+      <div class="rounded-xl p-4 domain-card border-2 border-dashed border-glow-500/30 bg-glow-500/5 flex flex-col items-center justify-center text-center">
+        <svg class="w-8 h-8 text-glow-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3-7 3V5z"/></svg>
+        <p class="text-sm text-glow-400 font-medium mb-1">收藏本页</p>
+        <p class="text-xs text-gray-400">本发布页为永久入口<br/>域名变更自动更新</p>
+        <button onclick="copyText(window.location.href)" class="mt-3 btn-ghost text-xs px-4 py-1.5 rounded-lg text-glow-400">复制本页地址</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DNS Fix Guide ====== -->
+  <section id="dns" class="max-w-5xl mx-auto px-4 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs font-medium mb-3">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        无法访问？
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-white mb-2">修改 DNS 即可解决 100% 访问问题</h3>
+      <p class="text-sm text-gray-400 max-w-lg mx-auto">大多数访问失败由 DNS 污染导致，换用公共 DNS 可立即修复，无需任何工具</p>
+    </div>
+
+    <!-- DNS server recommendation -->
+    <div class="glass rounded-xl p-4 mb-6 flex flex-wrap items-center justify-center gap-3 text-sm">
+      <span class="text-gray-400">推荐 DNS：</span>
+      <span class="px-3 py-1 rounded-lg bg-white/5 text-gray-200 font-mono">8.8.8.8</span>
+      <span class="px-3 py-1 rounded-lg bg-white/5 text-gray-200 font-mono">8.8.4.4</span>
+      <span class="px-3 py-1 rounded-lg bg-white/5 text-gray-200 font-mono">1.1.1.1</span>
+    </div>
+
+    <!-- OS tabs -->
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
+      <button class="os-tab active px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-os="win">
+        <svg class="w-4 h-4 inline mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 5l7-1 3 4-3 4-7-1V5z"/><path d="M10 4l7-1v5l-3 2-4-2V4z" opacity=".8"/></svg>
+        Windows
+      </button>
+      <button class="os-tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-os="mac">
+        <svg class="w-4 h-4 inline mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8 2.3-1.2 3.2-2.5c.5-.7 1-1.6 1.3-2.5-2.8-1.1-2.8-4.4-2.8-4.4zm-2.5-8c.7-.8 1.2-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.3z"/></svg>
+        macOS
+      </button>
+      <button class="os-tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-os="ios">
+        <svg class="w-4 h-4 inline mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8 2.3-1.2 3.2-2.5c.5-.7 1-1.6 1.3-2.5-2.8-1.1-2.8-4.4-2.8-4.4z"/></svg>
+        iOS
+      </button>
+      <button class="os-tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-os="android">
+        <svg class="w-4 h-4 inline mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18c0 .6.4 1 1 1h1v3.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5V19h2v3.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5V19h1c.6 0 1-.4 1-1V8H6v10zM3.5 8C2.7 8 2 8.7 2 9.5v7C2 17.3 2.7 18 3.5 18S5 17.3 5 16.5v-7C5 8.7 4.3 8 3.5 8zm17 0c-.8 0-1.5.7-1.5 1.5v7c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-7c0-.8-.7-1.5-1.5-1.5z"/><path d="M15.8 2.6l1.2-1.8c.1-.1 0-.2-.1-.2-.1 0-.2 0-.2.1l-1.3 1.9C14.5 2.2 13.8 2 13 2s-1.5.2-2.4.6L9.3.7c-.1-.1-.2-.1-.2-.1-.1 0-.1.1-.1.2l1.2 1.8C8.1 3.6 7 5.5 7 7.5h12c0-2-1.1-3.9-3.2-4.9zM10 6c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm5 0c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5z"/></svg>
+        Android
+      </button>
+      <button class="os-tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-os="router">
+        <svg class="w-4 h-4 inline mr-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v3a2 2 0 01-2 2M5 12v4a2 2 0 002 2h10a2 2 0 002-2v-4M8 8h.01M12 8h.01"/></svg>
+        路由器
+      </button>
+    </div>
+
+    <!-- OS Panels -->
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <!-- Windows -->
+      <div class="os-panel active" data-os="win">
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+            <div class="pt-0.5">
+              <p class="text-gray-200 text-sm">点击右下角网络图标，右键选择 <span class="text-glow-400 font-medium">"打开网络和 Internet 设置"</span></p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+            <div class="pt-0.5">
+              <p class="text-gray-200 text-sm">点击 <span class="text-glow-400 font-medium">"更改适配器选项"</span>，找到当前网络，右键 → <span class="text-glow-400 font-medium">"属性"</span></p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+            <div class="pt-0.5">
+              <p class="text-gray-200 text-sm">双击 <span class="text-glow-400 font-medium">"Internet 协议版本 4 (TCP/IPv4)"</span></p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+            <div class="pt-0.5">
+              <p class="text-gray-200 text-sm">选择 <span class="text-glow-400 font-medium">"使用下面的 DNS 服务器地址"</span>，首选填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.8.8</code>，备用填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.4.4</code></p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">5</div>
+            <div class="pt-0.5">
+              <p class="text-gray-200 text-sm">点击 <span class="text-glow-400 font-medium">"确定"</span> 保存，刷新页面即可访问</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- macOS -->
+      <div class="os-panel" data-os="mac">
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">苹果菜单 → <span class="text-glow-400 font-medium">"系统设置"</span> → <span class="text-glow-400 font-medium">"网络"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">选中当前连接 → <span class="text-glow-400 font-medium">"高级"</span> → <span class="text-glow-400 font-medium">"DNS"</span> 标签页</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">点 <span class="text-glow-400 font-medium">"+"</span> 依次添加 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.8.8</code> 和 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">1.1.1.1</code></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">点击 <span class="text-glow-400 font-medium">"好"</span> → <span class="text-glow-400 font-medium">"应用"</span> 即可</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- iOS -->
+      <div class="os-panel" data-os="ios">
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm"><span class="text-glow-400 font-medium">"设置"</span> → <span class="text-glow-400 font-medium">"Wi-Fi"</span> → 当前网络右侧 <span class="text-glow-400 font-medium">"ⓘ"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">下滑找到 <span class="text-glow-400 font-medium">"配置 DNS"</span> → 改为 <span class="text-glow-400 font-medium">"手动"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">删除原有 DNS，添加 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.8.8</code> 和 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">1.1.1.1</code></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">右上角 <span class="text-glow-400 font-medium">"存储"</span> 即可</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android -->
+      <div class="os-panel" data-os="android">
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm"><span class="text-glow-400 font-medium">"设置"</span> → <span class="text-glow-400 font-medium">"网络与互联网"</span> → 长按当前 Wi-Fi → <span class="text-glow-400 font-medium">"修改网络"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">展开 <span class="text-glow-400 font-medium">"高级选项"</span>，IP 设置改为 <span class="text-glow-400 font-medium">"静态"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm"><span class="text-glow-400 font-medium">DNS 1</span> 填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.8.8</code>，<span class="text-glow-400 font-medium">DNS 2</span> 填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">1.1.1.1</code></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">点击 <span class="text-glow-400 font-medium">"保存"</span>，重连 Wi-Fi 即可</p></div>
+          </div>
+          <div class="flex gap-4 mt-2 p-3 rounded-lg bg-glow-500/5 border border-glow-500/15">
+            <svg class="w-5 h-5 text-glow-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <p class="text-xs text-gray-400 pl-2">也可搜索 <span class="text-glow-400">"私人 DNS"</span>，填入 <code class="px-1.5 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">dns.google</code>，对所有网络生效。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Router -->
+      <div class="os-panel" data-os="router">
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">浏览器访问 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">192.168.1.1</code> 或 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">192.168.0.1</code> 登录路由器后台</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">找到 <span class="text-glow-400 font-medium">"WAN 设置"</span> → <span class="text-glow-400 font-medium">"DNS 设置"</span></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">首选 DNS 填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">8.8.8.8</code>，备用填 <code class="px-2 py-0.5 rounded bg-white/10 text-glow-400 font-mono text-xs">1.1.1.1</code></p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="step-num w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+            <div class="pt-0.5"><p class="text-gray-200 text-sm">保存后路由器重启，<span class="text-glow-400 font-medium">全屋设备即时生效</span></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== App Download ====== -->
+  <section id="app" class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="w-1 h-6 bg-glow-500 rounded-sm"></span>
+      <h3 class="text-lg font-bold text-white">APP 下载</h3>
+      <span class="text-xs text-gray-500">全平台支持 · 最新 v3.2.0</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <!-- iOS -->
+      <div class="glass glass-hover rounded-2xl p-6 text-center">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8 2.3-1.2 3.2-2.5c.5-.7 1-1.6 1.3-2.5-2.8-1.1-2.8-4.4-2.8-4.4zm-2.5-8c.7-.8 1.2-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.3z"/></svg>
+        </div>
+        <h4 class="text-white font-bold mb-1">iOS / iPadOS</h4>
+        <p class="text-xs text-gray-400 mb-4">iOS 13+ · 适配 iPhone & iPad</p>
+        <a href="#" class="btn-glow block w-full py-2.5 rounded-lg text-white text-sm font-medium">下载安装</a>
+        <p class="text-[10px] text-gray-500 mt-2">需在"设置-通用-VPN与设备管理"中信任证书</p>
+      </div>
+
+      <!-- Android -->
+      <div class="glass glass-hover rounded-2xl p-6 text-center">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18c0 .6.4 1 1 1h1v3.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5V19h2v3.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5V19h1c.6 0 1-.4 1-1V8H6v10zM3.5 8C2.7 8 2 8.7 2 9.5v7C2 17.3 2.7 18 3.5 18S5 17.3 5 16.5v-7C5 8.7 4.3 8 3.5 8zm17 0c-.8 0-1.5.7-1.5 1.5v7c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-7c0-.8-.7-1.5-1.5-1.5z"/></svg>
+        </div>
+        <h4 class="text-white font-bold mb-1">Android</h4>
+        <p class="text-xs text-gray-400 mb-4">Android 7+ · 28.5 MB</p>
+        <a href="#" class="btn-glow block w-full py-2.5 rounded-lg text-white text-sm font-medium">下载 APK</a>
+        <p class="text-[10px] text-gray-500 mt-2">安装时需允许"未知来源应用"</p>
+      </div>
+
+      <!-- TV -->
+      <div class="glass glass-hover rounded-2xl p-6 text-center">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-500 to-glow-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4" stroke-linecap="round"/></svg>
+        </div>
+        <h4 class="text-white font-bold mb-1">Android TV</h4>
+        <p class="text-xs text-gray-400 mb-4">适配电视盒 & 智能电视</p>
+        <a href="#" class="btn-glow block w-full py-2.5 rounded-lg text-white text-sm font-medium">下载 TV 版</a>
+        <p class="text-[10px] text-gray-500 mt-2">支持遥控器操作 · 大屏优化</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== Community ====== -->
+  <section class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="w-1 h-6 bg-glow-500 rounded-sm"></span>
+      <h3 class="text-lg font-bold text-white">加入社群</h3>
+      <span class="text-xs text-gray-500">获取最新动态 & 域名变更通知</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Telegram -->
+      <a href="#" class="glass glass-hover rounded-2xl p-5 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1 2.957-2.05 6.5-5.74 9.392-3.72 2.917-6.18 2.55-6.78 2.38-.85-.22-1.39-.83-1.39-1.55 0-.34.14-.74.45-1.15.32-.42.8-.85 1.41-1.28 1.21-.85 3.05-1.7 5.2-2.23 2.15-.53 4.2-.65 5.65-.43.45.07.85.17 1.2.29.36.12.65.27.86.43z"/></svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-white font-bold text-sm">Telegram 频道</h4>
+          <p class="text-xs text-gray-400 truncate">@libvio_official</p>
+        </div>
+        <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <!-- Discord -->
+      <a href="#" class="glass glass-hover rounded-2xl p-5 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.74 19.74 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.3 12.3 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.071.071 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-white font-bold text-sm">Discord 服务器</h4>
+          <p class="text-xs text-gray-400 truncate">加入交流群组</p>
+        </div>
+        <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <!-- Email -->
+      <a href="mailto:admin@libvio.com" class="glass glass-hover rounded-2xl p-5 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-white font-bold text-sm">邮件联系</h4>
+          <p class="text-xs text-gray-400 truncate">admin@libvio.com</p>
+        </div>
+        <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ====== Notice ====== -->
+  <section class="max-w-5xl mx-auto px-4 py-12">
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <div class="flex items-center gap-2 mb-4">
+        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <h3 class="text-base font-bold text-white">防骗提醒</h3>
+      </div>
+      <ul class="space-y-2.5 text-sm text-gray-300">
+        <li class="flex gap-2"><span class="text-glow-400 flex-shrink-0">•</span>本站 <span class="text-white font-medium">永久免费</span>，任何要求付费、充值、会员的均为假冒站点</li>
+        <li class="flex gap-2"><span class="text-glow-400 flex-shrink-0">•</span>请认准本发布页域名，切勿通过搜索引擎直接点击陌生链接</li>
+        <li class="flex gap-2"><span class="text-glow-400 flex-shrink-0">•</span>本站不会以任何理由索要密码、验证码或个人信息</li>
+        <li class="flex gap-2"><span class="text-glow-400 flex-shrink-0">•</span>如遇域名变更，请回到本发布页获取最新地址</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer class="border-t border-white/5 mt-4">
+    <div class="max-w-5xl mx-auto px-4 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-glow-500 to-glow-600 flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
+          </div>
+          <span class="text-lg font-black text-white">Libvio</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-gray-500">
+          <a href="#" class="hover:text-glow-400 transition">关于我们</a>
+          <span class="text-gray-700">|</span>
+          <a href="#" class="hover:text-glow-400 transition">联系方式</a>
+          <span class="text-gray-700">|</span>
+          <a href="#" class="hover:text-glow-400 transition">意见反馈</a>
+          <span class="text-gray-700">|</span>
+          <a href="#" class="hover:text-glow-400 transition">免责声明</a>
+        </div>
+      </div>
+      <div class="text-center text-xs text-gray-600">
+        <p>&copy; 2026 Libvio · 本站为非营利性导航发布页，所有内容均来自互联网</p>
+        <p class="mt-1">请遵守当地法律法规，本站不对任何第三方内容负责</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== Copy Toast ====== -->
+  <div id="copyToast" class="copy-toast bg-ink-700 border border-glow-500/30 text-white px-5 py-2.5 rounded-full shadow-xl text-sm flex items-center gap-2">
+    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    <span id="copyText">已复制到剪贴板</span>
+  </div>
+
+  <script>
+    // ===== Copy to clipboard =====
+    function copyText(text) {
+      const toast = document.getElementById('copyToast');
+      const label = document.getElementById('copyText');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          label.textContent = `"${text}" 已复制`;
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2000);
+        }).catch(() => fallbackCopy(text, label, toast));
+      } else {
+        fallbackCopy(text, label, toast);
+      }
+    }
+    function fallbackCopy(text, label, toast) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); label.textContent = `"${text}" 已复制`; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),2000); }
+      catch(e) { label.textContent = '复制失败，请手动复制'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),2000); }
+      document.body.removeChild(ta);
+    }
+
+    // ===== OS tab switching =====
+    document.querySelectorAll('.os-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const os = tab.dataset.os;
+        document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelector(`.os-panel[data-os="${os}"]`).classList.add('active');
+      });
+    });
+
+    // ===== Smooth scroll =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
