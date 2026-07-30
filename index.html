@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Libvio 发布页 · 永久导航</title>
+  <title>米兔音乐 发布页 · 永久导航</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,7 +116,7 @@
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     .copy-toast {
-      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120%);
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(180%);
       transition: transform 0.35s cubic-bezier(.22,1,.36,1); z-index: 60;
     }
     .copy-toast.show { transform: translateX(-50%) translateY(0); }
@@ -127,24 +128,6 @@
 </head>
 <body class="text-gray-200 font-sans min-h-screen overflow-x-hidden">
 
-  <!-- ====== Top Marquee Bar ====== -->
-  <div class="bg-ink-800/80 border-b border-white/5 overflow-hidden">
-    <div class="flex items-center h-9 text-xs text-gray-400">
-      <span class="flex-shrink-0 px-3 py-1 bg-glow-500/20 text-glow-400 font-medium ml-2 rounded">公告</span>
-      <div class="overflow-hidden flex-1">
-        <div class="marquee-track flex whitespace-nowrap gap-12 pl-6">
-          <span>🎉 本站最新域名已更新，请收藏本发布页获取永久入口</span>
-          <span>📱 APP 已更新至 v3.2.0，支持iOS/Android/TV全平台</span>
-          <span>⚠️ 请认准官方发布页，谨防钓鱼仿冒站点</span>
-          <span>🔔 加入 Telegram 频道，第一时间获取域名变更通知</span>
-          <span>🎉 本站最新域名已更新，请收藏本发布页获取永久入口</span>
-          <span>📱 APP 已更新至 v3.2.0，支持iOS/Android/TV全平台</span>
-          <span>⚠️ 请认准官方发布页，谨防钓鱼仿冒站点</span>
-          <span>🔔 加入 Telegram 频道，第一时间获取域名变更通知</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ====== Hero ====== -->
   <section class="relative hero-bg">
@@ -153,13 +136,11 @@
 
       <!-- Logo -->
       <div class="flex items-center justify-center gap-3 mb-8">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-500 to-glow-600 flex items-center justify-center float-fade shadow-lg shadow-glow-500/30">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z" fill="currentColor"/>
-          </svg>
+        <div class="w-14 h-14 rounded-2xl  from-glow-500 to-glow-600 flex items-center justify-center float-fade ">
+          <img src="https://www.qqmp3.vip/logo.png" alt="米兔音乐 Logo" class="w-14 h-14">
         </div>
         <div class="text-left">
-          <h1 class="text-3xl font-black text-white tracking-tight">Libvio</h1>
+          <h1 class="text-3xl font-black text-white tracking-tight">米兔音乐</h1>
           <p class="text-xs text-gray-400 -mt-0.5">永久发布页 · 收藏不迷路</p>
         </div>
       </div>
@@ -180,15 +161,15 @@
             <span class="text-green-400 text-sm font-medium">主域名</span>
           </div>
           <div class="flex-1 text-center md:text-left">
-            <p class="text-xl md:text-2xl font-bold text-white font-mono">libvio.com</p>
+            <p class="text-xl md:text-2xl font-bold text-white font-mono">qqmp3.vip</p>
             <p class="text-xs text-gray-500 mt-0.5">响应正常 · 延迟 42ms</p>
           </div>
           <div class="flex items-center gap-2 flex-shrink-0">
-            <button onclick="copyText('libvio.com')" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
+            <button onclick="copyText('www.qqmp3.vip')" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
               复制
             </button>
-            <a href="https://libvio.com" target="_blank" class="btn-glow text-sm px-5 py-2 rounded-lg text-white font-medium flex items-center gap-1.5">
+            <a href="https://www.qqmp3.vip" target="_blank" class="btn-glow text-sm px-5 py-2 rounded-lg text-white font-medium flex items-center gap-1.5">
               立即访问
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
@@ -196,21 +177,6 @@
         </div>
       </div>
 
-      <!-- Quick action buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-        <a href="#dns" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-          DNS 修复教程
-        </a>
-        <a href="#mirrors" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          备用域名
-        </a>
-        <a href="#app" class="btn-ghost text-sm px-4 py-2 rounded-lg text-gray-200 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-          APP 下载
-        </a>
-      </div>
     </div>
   </section>
 
@@ -246,45 +212,6 @@
         <div class="flex gap-2">
           <button onclick="copyText('libvio.cc')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
           <a href="https://libvio.cc" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
-        </div>
-      </div>
-      <!-- Mirror 3 -->
-      <div class="glass glass-hover rounded-xl p-4 domain-card">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs text-yellow-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>较慢</span>
-          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用3</span>
-        </div>
-        <p class="text-base font-bold text-white font-mono mb-1">libvio.net</p>
-        <p class="text-xs text-gray-500 mb-3">延迟 156ms · 韩国</p>
-        <div class="flex gap-2">
-          <button onclick="copyText('libvio.net')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
-          <a href="https://libvio.net" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
-        </div>
-      </div>
-      <!-- Mirror 4 -->
-      <div class="glass glass-hover rounded-xl p-4 domain-card">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>正常</span>
-          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用4</span>
-        </div>
-        <p class="text-base font-bold text-white font-mono mb-1">libvio.io</p>
-        <p class="text-xs text-gray-500 mb-3">延迟 72ms · 新加坡</p>
-        <div class="flex gap-2">
-          <button onclick="copyText('libvio.io')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-200">复制</button>
-          <a href="https://libvio.io" target="_blank" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-glow-400 text-center">访问</a>
-        </div>
-      </div>
-      <!-- Mirror 5 -->
-      <div class="glass glass-hover rounded-xl p-4 domain-card">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs text-red-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>维护中</span>
-          <span class="text-[10px] text-gray-500 bg-white/5 px-2 py-0.5 rounded">备用5</span>
-        </div>
-        <p class="text-base font-bold text-gray-500 font-mono mb-1">libvio.org</p>
-        <p class="text-xs text-gray-600 mb-3">暂不可用 · 等待恢复</p>
-        <div class="flex gap-2">
-          <button onclick="copyText('libvio.org')" class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-600 cursor-not-allowed" disabled>复制</button>
-          <span class="flex-1 btn-ghost text-xs py-1.5 rounded-lg text-gray-600 text-center cursor-not-allowed">访问</span>
         </div>
       </div>
       <!-- Permanent entry -->
@@ -480,7 +407,7 @@
           <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-glow-500 to-glow-600 flex items-center justify-center">
             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
           </div>
-          <span class="text-lg font-black text-white">Libvio</span>
+          <span class="text-lg font-black text-white">米兔音乐</span>
         </div>
         <div class="flex items-center gap-4 text-xs text-gray-500">
           <a href="#" class="hover:text-glow-400 transition">关于我们</a>
@@ -493,7 +420,7 @@
         </div>
       </div>
       <div class="text-center text-xs text-gray-600">
-        <p>&copy; 2026 Libvio · 本站为非营利性导航发布页，所有内容均来自互联网</p>
+        <p>&copy; 2026 米兔音乐 · 本站为非营利性导航发布页，所有内容均来自互联网</p>
         <p class="mt-1">请遵守当地法律法规，本站不对任何第三方内容负责</p>
       </div>
     </div>
